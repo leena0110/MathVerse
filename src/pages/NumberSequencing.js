@@ -5,6 +5,7 @@ import './GamePage.css';
 import './NumberSequencing.css';
 import correctSound from '../assets/correct.mp3';
 import wrongSound from '../assets/wrong.mp3';
+import { generateSequencing } from '../services/api';
 
 const NumberSequencing = () => {
     const navigate = useNavigate();
@@ -14,12 +15,11 @@ const NumberSequencing = () => {
     const [score, setScore] = useState({ current: 2, total: 2 });
     const [targetSequence, setTargetSequence] = useState([]);
     const [availableNumbers, setAvailableNumbers] = useState([]);
-    const [placedNumbers, setPlacedNumbers] = useState([]); // null or number
+    const [placedNumbers, setPlacedNumbers] = useState([]);
     const [feedback, setFeedback] = useState(null);
     const [startTime, setStartTime] = useState(Date.now());
     const [timeElapsed, setTimeElapsed] = useState(0);
 
-    // Sound logic moved inside playSound to prevent errors if files missing
     const playSound = (isCorrect) => {
         if (!settings?.soundEnabled) return;
         try {
@@ -30,28 +30,25 @@ const NumberSequencing = () => {
         }
     };
 
-    const generateLevel = () => {
-        const difficulty = settings?.difficulty || 'adaptive';
-
-        // Sequence length based on difficulty
-        let count = 4;
-        if (difficulty === 'easy') count = 3;
-        else if (difficulty === 'hard') count = 6;
-        else count = Math.min(3 + Math.floor(level / 2), 6); // Adaptive scales with level
-
-        const start = Math.floor(Math.random() * 20) + 1;
-        // Simple sequential or with steps
-        const step = Math.random() > 0.5 ? 1 : 2;
-        const seq = Array.from({ length: count }, (_, i) => start + i * step);
-
-        setTargetSequence(seq);
-
-        // Available numbers are shuffled version of sequence
-        setAvailableNumbers([...seq].sort(() => 0.5 - Math.random()));
-
-        // Placed numbers slots (all empty initially)
-        setPlacedNumbers(Array(count).fill(null));
-
+    const generateLevel = async () => {
+        try {
+            // 🌐 Fetch from backend server
+            const data = await generateSequencing(level, settings?.difficulty || 'adaptive');
+            setTargetSequence(data.sequence);
+            setAvailableNumbers(data.shuffled);
+            setPlacedNumbers(Array(data.sequence.length).fill(null));
+        } catch (err) {
+            // 🔁 Fallback: generate locally if server is offline
+            console.warn('Server offline, using local generation');
+            const difficulty = settings?.difficulty || 'adaptive';
+            let count = difficulty === 'easy' ? 3 : difficulty === 'hard' ? 6 : Math.min(3 + Math.floor(level / 2), 6);
+            const start = Math.floor(Math.random() * 20) + 1;
+            const step = Math.random() > 0.5 ? 1 : 2;
+            const seq = Array.from({ length: count }, (_, i) => start + i * step);
+            setTargetSequence(seq);
+            setAvailableNumbers([...seq].sort(() => 0.5 - Math.random()));
+            setPlacedNumbers(Array(count).fill(null));
+        }
         setFeedback(null);
         setStartTime(Date.now());
         setTimeElapsed(0);

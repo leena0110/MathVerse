@@ -5,6 +5,7 @@ import './GamePage.css';
 import './NumberLineAddition.css';
 import correctSound from '../assets/correct.mp3';
 import wrongSound from '../assets/wrong.mp3';
+import { generateAddition } from '../services/api';
 
 const NumberLineAddition = () => {
     const navigate = useNavigate();
@@ -19,19 +20,21 @@ const NumberLineAddition = () => {
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [currentPos, setCurrentPos] = useState(0);
 
-    const generateQuestion = () => {
-        // Difficulty logic
-        const maxVal = settings?.difficulty === 'easy' ? 5 : settings?.difficulty === 'hard' ? 20 : 5 + (level * 2);
-
-        let a = Math.floor(Math.random() * maxVal);
-        let b = Math.floor(Math.random() * (maxVal - a));
-
-        // Ensure non-zero for better visuals usually
-        if (a === 0) a = 1;
-        if (b === 0) b = 1;
-
-        setQuestion({ a, b, sum: a + b });
-        setCurrentPos(a); // Start hopping from 'a'
+    const generateQuestion = async () => {
+        try {
+            // 🌐 Fetch from backend server
+            const data = await generateAddition(level, settings?.difficulty || 'adaptive');
+            setQuestion({ a: data.a, b: data.b, sum: data.sum });
+            setCurrentPos(data.a);
+        } catch (err) {
+            // 🔁 Fallback: generate locally if server is offline
+            console.warn('Server offline, using local generation');
+            const maxVal = settings?.difficulty === 'easy' ? 5 : settings?.difficulty === 'hard' ? 20 : 5 + level * 2;
+            let a = Math.floor(Math.random() * maxVal) + 1;
+            let b = Math.floor(Math.random() * (maxVal - a)) + 1;
+            setQuestion({ a, b, sum: a + b });
+            setCurrentPos(a);
+        }
         setUserAnswer('');
         setFeedback(null);
         setStartTime(Date.now());
@@ -39,7 +42,6 @@ const NumberLineAddition = () => {
     };
 
     useEffect(() => {
-        // Initial load or level change
         generateQuestion();
     }, [level]);
 

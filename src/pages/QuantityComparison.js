@@ -5,41 +5,36 @@ import './GamePage.css';
 import './QuantityComparison.css';
 import correctSound from '../assets/correct.mp3';
 import wrongSound from '../assets/wrong.mp3';
+import { generateComparison } from '../services/api';
 
 const QuantityComparison = () => {
     const navigate = useNavigate();
     const { settings, recordAnswer, updateLevel, addTime } = useProgress();
 
-    const [level, setLevel] = useState(3); // Set initial level to 3 as per screenshot
+    const [level, setLevel] = useState(3);
     const [timeElapsed, setTimeElapsed] = useState(0);
-    const [difficulty, setDifficulty] = useState(settings?.difficulty || 'adaptive');
-    const [score, setScore] = useState({ current: 12, total: 15 }); // Set initial score as per screenshot
+    const [score, setScore] = useState({ current: 12, total: 15 });
     const [itemsLeft, setItemsLeft] = useState([]);
     const [itemsRight, setItemsRight] = useState([]);
     const [feedback, setFeedback] = useState(null);
     const [startTime, setStartTime] = useState(Date.now());
 
-    // Timer state
-    const [timer, setTimer] = useState(3);
-
-
-
-    const generateQuestion = () => {
-        // Difficulty logic
-        const maxItems = settings?.difficulty === 'easy' ? 4 : settings?.difficulty === 'hard' ? 10 : 3 + level;
-
-        // Adjust limit based on difficulty to avoid overcrowding while still scaling
-        const limit = settings?.difficulty === 'hard' ? 10 : 5;
-
-        // Generate specific scenario closer to screenshot 
-        const countLeft = Math.floor(Math.random() * limit) + 1;
-        let countRight = Math.floor(Math.random() * limit) + 1;
-
-        // To allow "Same Amount" option occasionally
-        if (Math.random() > 0.8) countRight = countLeft;
-
-        setItemsLeft(Array(countLeft).fill('🍎'));
-        setItemsRight(Array(countRight).fill('🍎'));
+    const generateQuestion = async () => {
+        try {
+            // 🌐 Fetch from backend server
+            const data = await generateComparison(level, settings?.difficulty || 'adaptive');
+            setItemsLeft(Array(data.countLeft).fill('🍎'));
+            setItemsRight(Array(data.countRight).fill('🍎'));
+        } catch (err) {
+            // 🔁 Fallback: generate locally if server is offline
+            console.warn('Server offline, using local generation');
+            const limit = settings?.difficulty === 'hard' ? 10 : 5;
+            const countLeft = Math.floor(Math.random() * limit) + 1;
+            let countRight = Math.floor(Math.random() * limit) + 1;
+            if (Math.random() > 0.8) countRight = countLeft;
+            setItemsLeft(Array(countLeft).fill('🍎'));
+            setItemsRight(Array(countRight).fill('🍎'));
+        }
         setFeedback(null);
         setStartTime(Date.now());
         setTimeElapsed(0);

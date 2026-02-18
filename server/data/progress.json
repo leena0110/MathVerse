@@ -1,0 +1,31 @@
+{
+    "quantityComparison": {
+        "level": 1,
+        "completed": 0,
+        "correct": 0
+    },
+    "numberLineAddition": {
+        "level": 1,
+        "completed": 0,
+        "correct": 0
+    },
+    "patternRecognition": {
+        "level": 1,
+        "completed": 0,
+        "correct": 0
+    },
+    "numberSequencing": {
+        "level": 1,
+        "completed": 0,
+        "correct": 0
+    },
+    "settings": {
+        "soundEnabled": true,
+        "animationSpeed": "normal",
+        "showTimer": false,
+        "difficulty": "adaptive",
+        "theme": "pastel"
+    },
+    "totalTime": 0,
+    "lastActive": ""
+}
