@@ -1,50 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ProgressProvider, useProgress } from './context/ProgressContext';
 import './App.css';
 
-// Pages
-import HomePage from './pages/HomePage';
-import Dashboard from './pages/Dashboard';
-import QuantityComparison from './pages/QuantityComparison';
-import NumberLineAddition from './pages/NumberLineAddition';
-import PatternRecognition from './pages/PatternRecognition';
-import NumberSequencing from './pages/NumberSequencing';
-import ParentDashboard from './pages/ParentDashboard';
-import Settings from './pages/Settings';
-import ProductDetails from './pages/ProductDetails';
+// Lazy load pages to avoid initialization issues and circular dependencies
+const WelcomePage = lazy(() => import('./pages/WelcomePage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const QuantityComparison = lazy(() => import('./pages/QuantityComparison'));
+const NumberLineAddition = lazy(() => import('./pages/NumberLineAddition'));
+const PatternRecognition = lazy(() => import('./pages/PatternRecognition'));
+const NumberSequencing = lazy(() => import('./pages/NumberSequencing'));
+const ParentDashboard = lazy(() => import('./pages/ParentDashboard'));
+const Settings = lazy(() => import('./pages/Settings'));
+const ProductDetails = lazy(() => import('./pages/ProductDetails'));
 
-// Separate component to use the context hook
-// Trigger rebuild for ProductInfo update
 const AppContent = () => {
   const { settings } = useProgress();
   const location = useLocation();
 
   useEffect(() => {
     // Dynamically update body class for global theme
-    document.body.className = settings?.theme || 'pastel';
+    if (settings && settings.theme) {
+      document.body.className = settings.theme;
+    } else {
+      document.body.className = 'pastel';
+    }
   }, [settings?.theme]);
 
-  // Handle undefined settings safely
   const themeClass = settings?.theme || 'pastel';
   const animSpeed = settings?.animationSpeed === 'slow' ? '2s' : settings?.animationSpeed === 'fast' ? '0.5s' : '1s';
 
   return (
-    <div className={`App ${themeClass}`} style={{
-      '--anim-speed': animSpeed
-    }}>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/game/quantity-comparison" element={<QuantityComparison />} />
-        <Route path="/game/number-line-addition" element={<NumberLineAddition />} />
-        <Route path="/game/pattern-recognition" element={<PatternRecognition />} />
-        <Route path="/game/number-sequencing" element={<NumberSequencing />} />
-        <Route path="/parent-dashboard" element={<ParentDashboard />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/product-info" element={<ProductDetails />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+    <div className={`App ${themeClass}`} style={{ '--anim-speed': animSpeed }}>
+      <Suspense fallback={<div className="loading-screen">Loading Portal...</div>}>
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/mathverse" element={<HomePage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/game/quantity-comparison" element={<QuantityComparison />} />
+          <Route path="/game/number-line-addition" element={<NumberLineAddition />} />
+          <Route path="/game/pattern-recognition" element={<PatternRecognition />} />
+          <Route path="/game/number-sequencing" element={<NumberSequencing />} />
+          <Route path="/parent-dashboard" element={<ParentDashboard />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/product-info" element={<ProductDetails />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };

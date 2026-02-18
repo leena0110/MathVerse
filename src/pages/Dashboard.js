@@ -41,7 +41,7 @@ const Dashboard = () => {
         <div className={`pastel-background dashboard-page ${settings?.theme === 'dark-mode' ? 'dark-mode' : ''}`}>
 
             {/* Home Button Top Left */}
-            <button className="home-back-btn" onClick={() => navigate('/')}>
+            <button className="home-back-btn" onClick={() => navigate('/mathverse')}>
                 ← Home
             </button>
 

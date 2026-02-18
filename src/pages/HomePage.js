@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
 import './HomePage.css';
 
-// --- IMPORTANT: PLACE YOUR IMAGES IN src/assets AND UPDATE THESE IMPORTS ---
-// If your file is a .jpg or .svg, change the extension here.
+// Assets
 import logo from '../assets/logo.png';
 import startLearningIcon from '../assets/start-learning-icon.png';
 import progressIcon from '../assets/progress-icon.png';
@@ -13,7 +12,6 @@ import visualLearningIcon from '../assets/visual-learning-icon.png';
 import adaptiveDifficultyIcon from '../assets/adaptive-learning-icon.png';
 import calmEnvironmentIcon from '../assets/calm-environment-icon.png';
 import progressTrackingIcon from '../assets/progress-tracking-icon.png';
-// --------------------------------------------------------------------------
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -63,18 +61,16 @@ const HomePage = () => {
 
                     <div className="nav-card" onClick={() => navigate('/product-info')} style={{ borderColor: '#D4A5FF' }}>
                         <div className="nav-icon">
-                            {/* If you have an image for this, uncomment below and import it */}
-                            {/* <img src={productDetailsIcon} alt="Product Details" className="nav-icon-img" /> */}
                             <span style={{ fontSize: '3rem' }}>📋</span>
                         </div>
-                        <h2>Product Details</h2>
-                        <p>Product Info & Student Profile</p>
+                        <h2>Product Info</h2>
+                        <p>Project Details & Profile</p>
                     </div>
                 </div>
 
                 {/* Features Highlight */}
                 <div className="features-section">
-                    <h3>Why MathVerse?</h3>
+                    <h3>Core Pillars</h3>
                     <div className="features-grid">
                         <div className="feature-item">
                             <img src={visualLearningIcon} alt="Visual Learning Icon" className="feature-icon-img" />
@@ -94,6 +90,24 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Back to Portal Button */}
+            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                <button
+                    onClick={() => navigate('/')}
+                    style={{
+                        padding: '10px 20px',
+                        background: 'transparent',
+                        border: '2px solid #A5B4FC',
+                        borderRadius: '12px',
+                        color: '#5A7BA6',
+                        fontWeight: '600',
+                        cursor: 'pointer'
+                    }}
+                >
+                    ← Back to Lab Portal
+                </button>
             </div>
         </div>
     );

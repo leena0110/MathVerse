@@ -15,7 +15,7 @@ const ProductInfo = () => {
                 <button className="nav-button back-button" onClick={() => navigate(-1)}>
                     ← Back
                 </button>
-                <button className="nav-button home-button" onClick={() => navigate('/')}>
+                <button className="nav-button home-button" onClick={() => navigate('/mathverse')}>
                     🏠 Home
                 </button>
             </div>

@@ -110,7 +110,7 @@ const QuantityComparison = () => {
                 <button className="nav-button back-button" onClick={() => navigate('/dashboard')}>
                     ← Back
                 </button>
-                <button className="nav-button home-button" onClick={() => navigate('/')}>
+                <button className="nav-button home-button" onClick={() => navigate('/mathverse')}>
                     🏠 Home
                 </button>
             </div>

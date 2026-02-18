@@ -1,0 +1,247 @@
+/* Welcome Page Styles */
+.welcome-page {
+    min-height: 100vh;
+    padding: 60px 0;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.content-container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Mission Section */
+.mission-section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+
+.mission-section h2 {
+    font-size: 2.2rem;
+    color: #5A7BA6;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.mission-text {
+    font-size: 1.25rem;
+    color: #6A6A8E;
+    line-height: 1.8;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* Autism Empowerment Section */
+.autism-section {
+    background: linear-gradient(135deg, rgba(212, 165, 255, 0.1) 0%, rgba(165, 200, 255, 0.1) 100%);
+    padding: 80px 20px;
+    margin: 60px 0;
+}
+
+.section-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 2.6rem;
+    color: #5A7BA6;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.section-header p {
+    font-size: 1.2rem;
+    color: #7A9BC6;
+}
+
+.autism-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.autism-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform calc(var(--anim-speed) * 0.3) ease;
+    text-align: center;
+}
+
+.autism-card:hover {
+    transform: translateY(-10px);
+}
+
+.autism-card h3 {
+    font-size: 1.5rem;
+    color: #5A7BA6;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.autism-card p {
+    font-size: 1.05rem;
+    color: #6A6A8E;
+    line-height: 1.6;
+}
+
+/* Labs Grid */
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.lab-card {
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    transition: all calc(var(--anim-speed) * 0.3) ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-card:hover {
+    transform: scale(1.02);
+}
+
+.lab-logo-container {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+.lab-card:nth-child(1) .lab-logo-container {
+    background: linear-gradient(to bottom, #F0FDF4, #FFFFFF);
+}
+
+.lab-card:nth-child(2) .lab-logo-container {
+    background: linear-gradient(to bottom, #F5F3FF, #FFFFFF);
+}
+
+.lab-logo-img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.lab-body {
+    padding: 35px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-body h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #1E293B;
+    font-weight: 800;
+}
+
+.lab-subtitle {
+    font-weight: 700;
+    color: #A5B4FC;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.lab-description {
+    color: #6A6A8E;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.feature-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.feature-badges span {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.lab-card:nth-child(1) .feature-badges span {
+    background: #F0FDF4;
+    color: #166534;
+}
+
+.lab-card:nth-child(2) .feature-badges span {
+    background: #F5F3FF;
+    color: #5B21B6;
+}
+
+.lab-btn {
+    margin-top: auto;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.lab-1-btn {
+    background: #A7F3D0;
+    color: #064E3B;
+}
+
+.lab-1-btn:hover {
+    background: #6EE7B7;
+}
+
+.lab-2-btn {
+    background: #DDD6FE;
+    color: #4C1D95;
+}
+
+.lab-2-btn:hover {
+    background: #C4B5FD;
+}
+
+.lab-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+
+    .autism-grid,
+    .labs-grid {
+        grid-template-columns: 1fr;
+    }
+}
