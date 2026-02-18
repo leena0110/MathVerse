@@ -1,0 +1,244 @@
+/* Parent Dashboard Styles */
+.dashboard-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.content-centered {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Nav Top */
+.game-nav-top {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.back-button {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid #E0E7FF;
+    color: #5A7BA6;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.back-button:hover {
+    background: #E0E7FF;
+    color: #4338CA;
+}
+
+/* Top Stats Row */
+.top-stats-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.stat-box {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+    border: 1px solid #F3F4F6;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: #F0F9FF;
+    color: #0284C7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1E293B;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #64748B;
+    font-weight: 600;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.2rem;
+    color: #5A7BA6;
+    margin-bottom: 25px;
+    align-self: flex-start;
+    padding-left: 20px;
+    font-weight: 700;
+    width: 100%;
+}
+
+/* Game Details Grid */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.detail-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border-left-width: 6px;
+    border-left-style: solid;
+}
+
+/* Specific Border Colors */
+.yellow-border {
+    border-left-color: #FCD34D;
+}
+
+.blue-border {
+    border-left-color: #60A5FA;
+}
+
+.purple-border {
+    border-left-color: #C084FC;
+}
+
+.orange-border {
+    border-left-color: #FB923C;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    color: #334155;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.card-row span:last-child {
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.green-text {
+    color: #16A34A !important;
+}
+
+.red-text {
+    color: #DC2626 !important;
+}
+
+.divider {
+    height: 1px;
+    background: #F1F5F9;
+    margin: 15px 0;
+}
+
+.highlight span:last-child {
+    color: #2563EB;
+    font-size: 1.1rem;
+}
+
+/* Charts Container */
+.charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.chart-card {
+    flex: 1;
+    min-width: 350px;
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.chart-card h3 {
+    text-align: center;
+    color: #5A7BA6;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+/* Bottom Actions */
+.bottom-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.action-btn.primary {
+    background: #FBBF24;
+    /* Yellow from screenshot */
+    color: #78350F;
+}
+
+.action-btn.secondary {
+    background: #93C5FD;
+    color: #1E3A8A;
+}
+
+.action-btn.danger {
+    background: #FCA5A5;
+    color: #7F1D1D;
+}

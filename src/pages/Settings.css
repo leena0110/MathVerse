@@ -1,0 +1,203 @@
+/* Settings Page Layout */
+.settings-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-color: #F8FAFC;
+    /* Light background behind cards */
+}
+
+/* Nav Top */
+.settings-nav-top {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.settings-nav-top .nav-button {
+    background: white;
+    border: 2px solid #E0E7FF;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: #5A7BA6;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.settings-nav-top .nav-button:hover {
+    background: #E0E7FF;
+    color: #4338CA;
+}
+
+/* Content Width */
+.settings-content-centered {
+    max-width: 800px;
+    width: 100%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Space between cards */
+}
+
+/* Setting Cards */
+.setting-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    border: 1px solid #F1F5F9;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #5A7BA6;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Align top for multi-line desc */
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.setting-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #334155;
+    /* Darker slate */
+}
+
+.setting-desc {
+    font-size: 0.85rem;
+    color: #94A3B8;
+    /* Muted gray */
+}
+
+/* Toggle Switch (Pill Style) */
+.toggle-switch {
+    padding: 8px 24px;
+    border-radius: 20px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 70px;
+}
+
+.toggle-switch.on {
+    background: #A5B4FC;
+    /* Light purple/blue ON color */
+    color: white;
+}
+
+.toggle-switch.off {
+    background: #E2E8F0;
+    color: #94A3B8;
+}
+
+/* Option Group (Buttons like Easy/Adaptive/Hard) */
+.options-group {
+    display: flex;
+    gap: 10px;
+}
+
+.option-pill {
+    padding: 8px 16px;
+    border: 1px solid #E2E8F0;
+    background: white;
+    border-radius: 8px;
+    color: #64748B;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option-pill:hover {
+    background: #F8FAFC;
+    border-color: #CBD5E1;
+}
+
+.option-pill.selected {
+    background: #FDE68A;
+    /* Peach/Yellow selection color from screenshot 2 */
+    border-color: #FCD34D;
+    color: #92400E;
+}
+
+/* Dark Mode Overrides for Settings Page */
+.dark-mode.settings-page {
+    background-color: #0F172A;
+}
+
+.dark-mode .nav-button {
+    background: #1E293B;
+    border-color: #334155;
+    color: #E2E8F0;
+}
+
+.dark-mode .setting-card {
+    background: #1E293B;
+    /* Dark card bg */
+    border-color: #334155;
+    box-shadow: none;
+}
+
+.dark-mode .section-title {
+    color: #93C5FD;
+}
+
+.dark-mode .setting-label {
+    color: #E2E8F0;
+}
+
+.dark-mode .setting-desc {
+    color: #94A3B8;
+}
+
+.dark-mode .option-pill {
+    background: #334155;
+    border-color: #475569;
+    color: #CBD5E1;
+}
+
+.dark-mode .option-pill.selected {
+    background: #818CF8;
+    border-color: #6366F1;
+    color: white;
+}
+
+.dark-mode .toggle-switch.off {
+    background: #334155;
+    color: #94A3B8;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 600px) {
+    .setting-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .options-group {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}

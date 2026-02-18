@@ -1,0 +1,41 @@
+/* Product Info - Additional Styles */
+
+.product-page {
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.reduced-width {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.collaborators-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.collab-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.collab-role {
+    font-size: 0.9rem;
+    color: #94A3B8;
+    font-weight: 600;
+}
+
+.collab-name {
+    font-size: 1.1rem;
+    color: #1E293B;
+    font-weight: 700;
+}
+
+/* Reusing styles from ProductDetails.css for sections */
+.sub-highlight strong {
+    color: #5A7BA6;
+}

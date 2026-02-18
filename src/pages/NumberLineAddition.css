@@ -1,0 +1,215 @@
+/* Game Page General Styles from QuantityComparison kept for consistency */
+.game-content-centered {
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.game-title {
+    color: #5A7BA6;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.stats-pills {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pill {
+    background: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #888;
+    border: 1px solid #E5E7EB;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.question-display {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #5A7BA6;
+    margin-bottom: 30px;
+}
+
+.number-line-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    /* Reduced to match screenshot closer */
+    margin: 0 auto;
+}
+
+.number-line-visual {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Adjust based on range size */
+    max-width: 100%;
+    flex-wrap: nowrap;
+    /* Horizontal scroll if too long? Or wrap? Screenshot shows short range. */
+    overflow-x: auto;
+    padding-bottom: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.number-point-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width: 40px;
+}
+
+.tick-mark {
+    height: 20px;
+    width: 2px;
+    background: #A5C8FF;
+    margin-bottom: 10px;
+}
+
+.number-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 700;
+    color: #5A7BA6;
+    font-size: 1.2rem;
+    background: #F8FAFC;
+    /* Light gray default */
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s;
+}
+
+.number-box.green-box {
+    background: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+    transform: scale(1.1);
+}
+
+.number-box.yellow-box {
+    background: #FDE68A;
+    color: #92400E;
+    border-color: #F59E0B;
+}
+
+.number-box.current-hop {
+    border: 3px solid #C084FC;
+    transform: translateY(-10px) scale(1.1);
+    background: #FAF5FF;
+    box-shadow: 0 4px 10px rgba(192, 132, 252, 0.3);
+    z-index: 10;
+}
+
+.number-box.active-path {
+    background: #E0E7FF;
+    border-color: #A5C8FF;
+}
+
+@keyframes pulse-hop {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Connecting line logic via pseudo element on container */
+.line-connector {
+    position: absolute;
+    top: 10px;
+    /* Align with middle of ticks */
+    left: 20px;
+    /* Padding offset */
+    right: 20px;
+    height: 2px;
+    background: #E2E8F0;
+    z-index: -1;
+    display: none;
+    /* Hide for now as ticks are discrete in Screenshot 1 */
+}
+
+/* Instruction Text */
+.instruction-mini {
+    font-size: 1rem;
+    color: #64748B;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.answer-input {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 2px solid #C084FC;
+    /* Purple outline like screenshot */
+    border-radius: 12px;
+    outline: none;
+    font-weight: 700;
+    color: #581C87;
+    background: #FAF5FF;
+}
+
+.answer-input:focus {
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2);
+}
+
+.btn-check {
+    background: #FBBF24;
+    /* Yellow/Orange */
+    color: #78350F;
+    border: none;
+    padding: 0 30px;
+    height: 60px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-check:hover {
+    transform: translateY(-2px);
+    background: #F59E0B;
+}
+
+/* Footer Info */
+.game-footer-info {
+    margin-top: 50px;
+    font-size: 0.85rem;
+    color: #9CA3AF;
+}
+
+/* Nav Buttons specific to this page if needed, but reusing global class */

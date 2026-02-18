@@ -1,0 +1,206 @@
+.pastel-background {
+    min-height: 100vh;
+    width: 100%;
+}
+
+.game-page {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 80px 20px 40px;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-title {
+    font-size: 2.5rem;
+    color: #5A7BA6;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.level-badge,
+.score-badge {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #5A7BA6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.question-prompt {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #6A6A8E;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Common Button Styles */
+.btn {
+    background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 8px;
+    transition: background calc(var(--anim-speed) * 0.2), transform calc(var(--anim-speed) * 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #ffb300 0%, #ffd700 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.btn-secondary {
+    background: #A5C8FF;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #7A9BC6;
+}
+
+.nav-button {
+    background: #fff;
+    color: #5A7BA6;
+    border: 2px solid #A5C8FF;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+    transition: background calc(var(--anim-speed) * 0.2), color calc(var(--anim-speed) * 0.2);
+}
+
+.nav-button:hover {
+    background: #A5C8FF;
+    color: #fff;
+}
+
+/* Feedback Styles */
+.feedback {
+    margin: 24px 0 0 0;
+    padding: 18px 24px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.feedback.correct {
+    background: #e6ffe6;
+    color: #388e3c;
+}
+
+.feedback.try-again {
+    background: #fff3e6;
+    color: #e65100;
+}
+
+.feedback-icon {
+    font-size: 1.6rem;
+    margin-right: 8px;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.progress-text {
+    font-size: 1.1rem;
+    color: #7A9BC6;
+    font-weight: 600;
+}
+
+.game-nav-top {
+    position: fixed;
+    top: 20px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 9999;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.game-nav-top .nav-button {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    pointer-events: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+
+/* Prominent Feedback Bar logic for all Games */
+.feedback-overlay {
+    background: #e8f5e9;
+    /* Very light pastel green */
+    color: #2e7d32;
+    /* Material dark green */
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: fadeIn calc(var(--anim-speed) * 0.3) ease-out;
+    box-sizing: border-box;
+}
+
+.feedback-icon {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.feedback-overlay.error {
+    background: #ffebee;
+    /* Light pastel red */
+    color: #c62828;
+    /* Material dark red */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

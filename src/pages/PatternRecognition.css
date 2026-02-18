@@ -1,0 +1,162 @@
+/* Pattern Recognition - Screenshot Match */
+
+/* General Layout - Centered */
+.game-content-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Title & Stats */
+.game-title {
+    color: #5A7BA6;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.stats-pills {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pill {
+    background: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #888;
+    border: 1px solid #E5E7EB;
+    font-weight: 600;
+}
+
+.instruction-text {
+    font-size: 1.2rem;
+    color: #64748B;
+    /* Gray text */
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Main White Card */
+.pattern-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Pattern Row */
+.pattern-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.pattern-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 12px;
+    background: white;
+}
+
+/* Specific Border Styles from screenshot */
+.blue-border {
+    border: 2px solid #60A5FA;
+    /* Blue */
+    background: #EFF6FF;
+    /* Very light blue bg */
+}
+
+.dashed-box {
+    border: 2px dashed #FCD34D;
+    /* Yellow/Orange dashed */
+    background: #FFFBEB;
+    color: #F59E0B;
+}
+
+/* Options Row */
+.options-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.pattern-option-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background: white;
+}
+
+.purple-border {
+    border: 2px solid #C084FC;
+    /* Purple */
+    background: #FAF5FF;
+}
+
+.pattern-option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Feedback bar removed to use global GamePage.css */
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Footer Info */
+.game-footer-info {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: #9CA3AF;
+}
+
+/* Timer Pill (reused from global or redfined) */
+.timer-pill {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FCA5A5;
+    /* Red/Pink */
+    color: white;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(252, 165, 165, 0.4);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

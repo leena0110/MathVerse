@@ -1,0 +1,187 @@
+/* Game Page General */
+.game-content-centered {
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.game-title {
+    color: #5A7BA6;
+    font-size: 2.2rem;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.instruction-text {
+    font-size: 1.4rem;
+    color: #7A9BC6;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Stats Pills */
+.stats-pills {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pill {
+    background: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #888;
+    border: 1px solid #E5E7EB;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Comparison Container */
+.comparison-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.object-group {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    min-width: 250px;
+    min-height: 140px;
+    max-width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F3F4F6;
+    flex-wrap: wrap;
+}
+
+.object-group.winner {
+    border: 3px solid #4CAF50;
+    background: #ECFDF5;
+}
+
+.object {
+    font-size: 2.5rem;
+    animation: popIn 0.3s ease-out backwards;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.vs-circle {
+    background: #EFF6FF;
+    color: #93C5FD;
+    font-weight: 800;
+    font-size: 1.2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Answer Buttons */
+.answer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.game-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #4B5563;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-yellow {
+    background: #FDE68A;
+    color: #92400E;
+}
+
+.btn-blue {
+    background: #BFDBFE;
+    color: #1E40AF;
+}
+
+.btn-orange {
+    background: #FFEDD5;
+    color: #9A3412;
+}
+
+/* Footer Info */
+.game-footer-info {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+/* Timer Pill */
+.timer-pill {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FCA5A5;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(252, 165, 165, 0.4);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Feedback styling removed to use global GamePage.css */
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

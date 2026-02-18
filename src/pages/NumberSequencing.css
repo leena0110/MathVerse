@@ -1,0 +1,225 @@
+/* Number Sequencing - New Design */
+
+/* General Layout */
+.game-content-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Title & Stats */
+.game-title {
+    color: #5A7BA6;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* Stats Pills with specific styling from screenshot */
+.stats-pills {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pill {
+    background: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #888;
+    border: 1px solid #E5E7EB;
+    font-weight: 600;
+}
+
+/* Instructions */
+.instruction-text {
+    font-size: 1.2rem;
+    color: #64748B;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Main White Card */
+.sequence-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.label-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #94A3B8;
+    /* Muted gray label */
+    align-self: flex-start;
+    margin-left: 20px;
+}
+
+/* Number Pool (Available Numbers) */
+.number-pool {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Draggable Numbers - Match orange/yellow pills from screnshot 2? Or Blue/White Cards? 
+   Screenshot 1 shows Orange Dashed. Screenshot 2 shows Orange Bordered white boxes.
+   Let's use Orange Bordered White Boxes for Available.
+*/
+.number-card {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #FCD34D;
+    /* Orange/Yellow Border */
+    background: white;
+    color: #4B5563;
+    /* Dark gray text */
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: transform 0.2s;
+    user-select: none;
+}
+
+.number-card:hover {
+    transform: translateY(-2px);
+    background: #FFFBEB;
+}
+
+.number-card:active {
+    cursor: grabbing;
+}
+
+/* Drop Zone Container */
+.drop-zone-container {
+    width: 100%;
+    border: 2px dashed #BFDBFE;
+    /* Light Blue Dashed */
+    background: #EFF6FF;
+    /* Very light blue fill */
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.drop-slots-row {
+    display: flex;
+    gap: 15px;
+}
+
+.sequence-slot {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #A5B4FC;
+    /* Purple dashed slots inside the blue area */
+    border-radius: 12px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropped-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4F46E5;
+    /* Indigo text for placed items */
+}
+
+.drop-instruction {
+    font-size: 0.85rem;
+    color: #93C5FD;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+/* Action Buttons */
+.action-buttons-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-check-yellow {
+    background: #FFC107;
+    /* Yellow */
+    color: #78350F;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.btn-check-yellow:hover {
+    background: #F59E0B;
+}
+
+.btn-reset-blue {
+    background: #A5C8FF;
+    /* Light Blue */
+    color: #1E3A8A;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-reset-blue:hover {
+    background: #93C5FD;
+}
+
+/* Feedback bar removed to use global GamePage.css */
+
+/* Footer Info */
+.game-footer-info {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: #9CA3AF;
+}
+
+/* Reuse Timer Pill */
+.timer-pill {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FCA5A5;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(252, 165, 165, 0.4);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
