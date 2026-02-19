@@ -1,143 +1,132 @@
-/* Welcome Page Styles */
+/* Main Landing Page */
 .welcome-page {
     min-height: 100vh;
-    padding: 60px 0;
-    overflow-x: hidden;
+    padding: 80px 40px;
+    /* Large padding */
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .content-container {
-    max-width: 1200px;
+    max-width: 1400px;
+    /* Wide container */
     width: 100%;
 }
 
-/* Mission Section */
-.mission-section {
-    max-width: 900px;
-    margin: 0 auto 60px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    border: 3px solid rgba(255, 255, 255, 0.4);
+/* Header */
+.portfolio-header {
     text-align: center;
+    margin-bottom: 60px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.mission-section h2 {
-    font-size: 2.2rem;
-    color: #5A7BA6;
-    margin-bottom: 20px;
+.portfolio-title {
+    font-size: 3.5rem;
+    /* Large Title */
     font-weight: 800;
+    color: #5A7BA6;
+    margin-bottom: 25px;
+    line-height: 1.2;
 }
 
-.mission-text {
-    font-size: 1.25rem;
-    color: #6A6A8E;
-    line-height: 1.8;
-    max-width: 750px;
-    margin: 0 auto;
+.portfolio-subtitle {
+    font-size: 1.4rem;
+    /* Large Subtitle */
+    line-height: 1.6;
+    color: #64748b;
 }
 
-/* Autism Empowerment Section */
-.autism-section {
-    background: linear-gradient(135deg, rgba(212, 165, 255, 0.1) 0%, rgba(165, 200, 255, 0.1) 100%);
-    padding: 80px 20px;
-    margin: 60px 0;
+.section-divider {
+    width: 100px;
+    height: 6px;
+    background: #A5C8FF;
+    border-radius: 3px;
+    margin: 50px auto;
 }
 
-.section-content {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.section-header {
+.section-title-centered {
     text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #5A7BA6;
     margin-bottom: 50px;
 }
 
-.section-header h2 {
-    font-size: 2.6rem;
-    color: #5A7BA6;
-    margin-bottom: 15px;
-    font-weight: 800;
-}
-
-.section-header p {
-    font-size: 1.2rem;
-    color: #7A9BC6;
-}
-
+/* Pillars: Autism Grid */
 .autism-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 40px;
+    margin-bottom: 80px;
 }
 
 .autism-card {
     background: white;
-    padding: 40px 30px;
+    padding: 40px;
     border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform calc(var(--anim-speed) * 0.3) ease;
     text-align: center;
-}
-
-.autism-card:hover {
-    transform: translateY(-10px);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 220px;
 }
 
 .autism-card h3 {
-    font-size: 1.5rem;
     color: #5A7BA6;
     margin-bottom: 15px;
+    font-size: 1.5rem;
     font-weight: 800;
 }
 
 .autism-card p {
-    font-size: 1.05rem;
-    color: #6A6A8E;
+    color: #64748b;
+    font-size: 1.1rem;
     line-height: 1.6;
 }
 
-/* Labs Grid */
-.labs-grid {
+/* 3-Column Labs Grid */
+.labs-grid-3-col {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-    margin-top: 40px;
-    padding: 0 20px;
 }
 
 .lab-card {
     background: white;
-    border-radius: 30px;
+    border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-    transition: all calc(var(--anim-speed) * 0.3) ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    border: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
+    min-height: 600px;
+    /* Really tall cards */
 }
 
 .lab-card:hover {
-    transform: scale(1.02);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
 .lab-logo-container {
-    height: 180px;
+    height: 240px;
+    /* Taller image area */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: #FFFFFF;
-}
-
-.lab-card:nth-child(1) .lab-logo-container {
-    background: linear-gradient(to bottom, #F0FDF4, #FFFFFF);
-}
-
-.lab-card:nth-child(2) .lab-logo-container {
-    background: linear-gradient(to bottom, #F5F3FF, #FFFFFF);
+    background: #f8fafc;
+    padding: 30px;
 }
 
 .lab-logo-img {
@@ -148,100 +137,100 @@
 
 .lab-body {
     padding: 35px;
+    /* Spacious internal padding */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
+.lab-subtitle {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
 .lab-body h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #1E293B;
+    font-size: 2rem;
+    /* Big Headers */
+    color: #0f172a;
+    margin-bottom: 15px;
     font-weight: 800;
 }
 
-.lab-subtitle {
-    font-weight: 700;
-    color: #A5B4FC;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    display: block;
-}
-
 .lab-description {
-    color: #6A6A8E;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    margin-bottom: 20px;
+    color: #64748b;
+    font-size: 1.15rem;
+    /* Larger body text */
+    margin-bottom: 30px;
+    line-height: 1.6;
+    flex-grow: 1;
 }
 
 .feature-badges {
     display: flex;
+    gap: 12px;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .feature-badges span {
-    padding: 6px 14px;
+    background: #f1f5f9;
+    padding: 8px 16px;
     border-radius: 100px;
     font-size: 0.85rem;
+    color: #475569;
     font-weight: 700;
-}
-
-.lab-card:nth-child(1) .feature-badges span {
-    background: #F0FDF4;
-    color: #166534;
-}
-
-.lab-card:nth-child(2) .feature-badges span {
-    background: #F5F3FF;
-    color: #5B21B6;
 }
 
 .lab-btn {
     margin-top: auto;
-    padding: 15px 30px;
-    border-radius: 15px;
+    width: 100%;
+    padding: 16px;
+    /* Big touch target */
+    border-radius: 12px;
+    text-align: center;
     font-weight: 800;
     text-decoration: none;
-    text-align: center;
-    font-size: 1.1rem;
-    transition: all 0.2s;
     cursor: pointer;
     border: none;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s;
 }
 
 .lab-1-btn {
-    background: #A7F3D0;
-    color: #064E3B;
-}
-
-.lab-1-btn:hover {
-    background: #6EE7B7;
+    background: #d1fae5;
+    color: #065f46;
 }
 
 .lab-2-btn {
-    background: #DDD6FE;
-    color: #4C1D95;
+    background: #ede9fe;
+    color: #5b21b6;
 }
 
-.lab-2-btn:hover {
-    background: #C4B5FD;
+.lab-3-btn {
+    background: #dbeafe;
+    /* Light Blue */
+    color: #1e40af;
+    /* Dark Blue */
 }
 
 .lab-btn:hover {
     opacity: 0.9;
-    transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
+/* Responsive */
+@media (max-width: 1000px) {
 
     .autism-grid,
-    .labs-grid {
+    .labs-grid-3-col {
         grid-template-columns: 1fr;
+    }
+
+    .portfolio-title {
+        font-size: 2.5rem;
     }
 }

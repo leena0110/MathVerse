@@ -14,7 +14,7 @@ const PatternRecognition = lazy(() => import('./pages/PatternRecognition'));
 const NumberSequencing = lazy(() => import('./pages/NumberSequencing'));
 const ParentDashboard = lazy(() => import('./pages/ParentDashboard'));
 const Settings = lazy(() => import('./pages/Settings'));
-const ProductDetails = lazy(() => import('./pages/ProductDetails'));
+const ProductInfo = lazy(() => import('./pages/ProductInfo'));
 
 const AppContent = () => {
   const { settings } = useProgress();
@@ -48,7 +48,7 @@ const AppContent = () => {
           <Route path="/game/number-sequencing" element={<NumberSequencing />} />
           <Route path="/parent-dashboard" element={<ParentDashboard />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/product-info" element={<ProductDetails />} />
+          <Route path="/product-info" element={<ProductInfo />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

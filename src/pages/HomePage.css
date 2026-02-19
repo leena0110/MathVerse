@@ -12,6 +12,10 @@
 .home-page {
     min-height: 100vh;
     padding: 20px 20px 60px;
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .hero-section {
