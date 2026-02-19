@@ -7,6 +7,7 @@ import './ParentDashboard.css';
 const ParentDashboard = () => {
     const navigate = useNavigate();
     const { progress, settings = {} } = useProgress();
+    // eslint-disable-next-line no-unused-vars
     const [activeTab, setActiveTab] = useState('overview'); // For managing tabs if needed, but single page is fine
 
     // Transform progress data for charts

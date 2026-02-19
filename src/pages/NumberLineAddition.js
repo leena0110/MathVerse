@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
+import { StreakReward, ScaffoldingHint, getEncouragement } from '../components/ResearchStrategies';
 import './GamePage.css';
 import './NumberLineAddition.css';
 import correctSound from '../assets/correct.mp3';
@@ -19,6 +20,8 @@ const NumberLineAddition = () => {
     const [startTime, setStartTime] = useState(Date.now());
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [currentPos, setCurrentPos] = useState(0);
+    const [showHint, setShowHint] = useState(false);
+    const [encouragement, setEncouragement] = useState('');
 
     const generateQuestion = async () => {
         try {
@@ -37,12 +40,14 @@ const NumberLineAddition = () => {
         }
         setUserAnswer('');
         setFeedback(null);
+        setShowHint(false);
         setStartTime(Date.now());
         setTimeElapsed(0);
     };
 
     useEffect(() => {
         generateQuestion();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [level]);
 
     useEffect(() => {
@@ -71,6 +76,7 @@ const NumberLineAddition = () => {
 
         playSound(isCorrect);
         setFeedback(isCorrect ? 'correct' : 'try-again');
+        setEncouragement(getEncouragement(isCorrect)); // Strategy 3
 
         const timeSpent = (Date.now() - startTime) / 1000;
         addTime(timeSpent);
@@ -79,6 +85,7 @@ const NumberLineAddition = () => {
         if (isCorrect) {
             const newStreak = streak + 1;
             setStreak(newStreak);
+            setShowHint(false); // Strategy 2: hide hint on correct
 
             // Hopping Animation Loop
             let tempPos = question.a;
@@ -88,23 +95,20 @@ const NumberLineAddition = () => {
                     setCurrentPos(tempPos);
                 } else {
                     clearInterval(hopInterval);
-                    // Final navigation/next question logic after animation
                     const shouldLevelUp = newStreak >= 3 && settings?.difficulty === 'adaptive';
-
                     if (shouldLevelUp) {
                         const newLvl = level + 1;
-                        setLevel(newLvl); // This will trigger the generateQuestion via useEffect
+                        setLevel(newLvl);
                         updateLevel('numberLineAddition', newLvl);
                         setStreak(0);
                     } else {
-                        // Only generate here if we DID NOT level up
                         setTimeout(generateQuestion, 1500);
                     }
                 }
-            }, 300); // 300ms per hop
-
+            }, 300);
         } else {
             setStreak(0);
+            setShowHint(true); // Strategy 2: Show scaffolding hint
             setTimeout(() => setFeedback(null), 1000);
         }
     };
@@ -136,6 +140,9 @@ const NumberLineAddition = () => {
                     <span className="pill">Streak: {streak} 🔥</span>
                 </div>
 
+                {/* Strategy 1: Streak Reward Badge */}
+                <StreakReward streak={streak} />
+
                 <div className="question-display">
                     {question.a} + {question.b} = ?
                 </div>
@@ -143,15 +150,10 @@ const NumberLineAddition = () => {
                 <div className="number-line-card">
                     <div className="number-line-visual">
                         {numberLineRange.map((num) => {
-                            // Determine style for this number point
-                            let statusClass = '';
-                            if (feedback === 'correct' && num === question.sum) statusClass = 'correct-highlight';
-                            else if (num === question.a) statusClass = 'start-point';
                             // In screenshot 1: 0,1,2,3 are shown. 3 is green (target). 1 is yellow (start). 
                             // Let's keep it simple: Start is highlighted, Result is highlighted green on success.
 
-                            // Highlight range? Screenshot 1 shows 0-3 active.
-                            // Maybe highlight 0 to sum?
+                            // eslint-disable-next-line no-unused-vars
                             const isActive = num <= question.sum;
 
                             return (
@@ -189,6 +191,13 @@ const NumberLineAddition = () => {
                     </div>
                 </div>
 
+                {/* Strategy 2: Scaffolding Hint after wrong answer */}
+                <ScaffoldingHint
+                    gameType="addition"
+                    questionData={{ a: question.a, b: question.b }}
+                    show={showHint}
+                />
+
                 {/* Footer Info */}
                 <div className="game-footer-info">
                     Round 16 • Level {level}
@@ -206,13 +215,13 @@ const NumberLineAddition = () => {
             {feedback === 'correct' && (
                 <div className="feedback-overlay">
                     <span className="feedback-icon">✓</span>
-                    <span className="feedback-text">Well done!</span>
+                    <span className="feedback-text">{encouragement}</span>
                 </div>
             )}
             {feedback === 'try-again' && (
                 <div className="feedback-overlay error">
                     <span className="feedback-icon">✗</span>
-                    <span className="feedback-text">Try again!</span>
+                    <span className="feedback-text">{encouragement}</span>
                 </div>
             )}
         </div>

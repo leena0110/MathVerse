@@ -1,6 +1,7 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ProgressProvider, useProgress } from './context/ProgressContext';
+import InteractionTracker from './components/InteractionTracker';
 import './App.css';
 
 // Lazy load pages to avoid initialization issues and circular dependencies
@@ -31,6 +32,9 @@ const AppContent = () => {
   const themeClass = settings?.theme || 'pastel';
   const animSpeed = settings?.animationSpeed === 'slow' ? '2s' : settings?.animationSpeed === 'fast' ? '0.5s' : '1s';
 
+  // Only show tracker on game pages (not on welcome/home/parent pages)
+  const isGamePage = location.pathname.startsWith('/game/');
+
   return (
     <div className={`App ${themeClass}`} style={{ '--anim-speed': animSpeed }}>
       <Suspense fallback={<div className="loading-screen">Loading Portal...</div>}>
@@ -48,6 +52,8 @@ const AppContent = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
+      {/* 🎯 Interaction Tracker: logs keystrokes, mouse clicks, screen events on game pages */}
+      <InteractionTracker showPanel={isGamePage} />
     </div>
   );
 };

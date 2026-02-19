@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
+import { StreakReward, ScaffoldingHint, getEncouragement } from '../components/ResearchStrategies';
 import './GamePage.css';
 import './QuantityComparison.css';
 import correctSound from '../assets/correct.mp3';
@@ -9,15 +10,20 @@ import { generateComparison } from '../services/api';
 
 const QuantityComparison = () => {
     const navigate = useNavigate();
-    const { settings, recordAnswer, updateLevel, addTime } = useProgress();
+    // eslint-disable-next-line no-unused-vars
+    const { settings, recordAnswer } = useProgress();
 
-    const [level, setLevel] = useState(3);
+    const [level] = useState(3); // Fixed level 3 for demo
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [score, setScore] = useState({ current: 12, total: 15 });
     const [itemsLeft, setItemsLeft] = useState([]);
     const [itemsRight, setItemsRight] = useState([]);
     const [feedback, setFeedback] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [startTime, setStartTime] = useState(Date.now());
+    const [streak, setStreak] = useState(0);
+    const [showHint, setShowHint] = useState(false);
+    const [encouragement, setEncouragement] = useState('');
 
     const generateQuestion = async () => {
         try {
@@ -36,6 +42,7 @@ const QuantityComparison = () => {
             setItemsRight(Array(countRight).fill('🍎'));
         }
         setFeedback(null);
+        setShowHint(false);
         setStartTime(Date.now());
         setTimeElapsed(0);
     };
@@ -54,6 +61,7 @@ const QuantityComparison = () => {
     useEffect(() => {
         generateQuestion();
         setTimeElapsed(0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const playSound = (isCorrect) => {
@@ -83,17 +91,23 @@ const QuantityComparison = () => {
         playSound(isCorrect);
 
         if (isCorrect) {
-            setFeedback('correct'); // Show "Well Done"
+            setFeedback('correct');
+            setEncouragement(getEncouragement(true)); // Strategy 3: Varied encouragement
+            setShowHint(false);
+            const newStreak = streak + 1;
+            setStreak(newStreak); // Strategy 1: Track streak
             recordAnswer('quantityComparison', true);
             setScore(prev => ({ ...prev, current: prev.current + 1, total: prev.total + 1 }));
-            // Delay next question to allow user to see "Well Done" and hear sound
             setTimeout(() => {
                 setFeedback(null);
                 generateQuestion();
-            }, 1500);
+            }, 1800);
         } else {
             setFeedback('try-again');
-            setTimeout(() => setFeedback(null), 1000);
+            setEncouragement(getEncouragement(false)); // Strategy 3: Gentle encouragement
+            setStreak(0);
+            setShowHint(true); // Strategy 2: Show scaffolding hint
+            setTimeout(() => setFeedback(null), 1200);
         }
     };
 
@@ -117,23 +131,34 @@ const QuantityComparison = () => {
                 <div className="stats-pills">
                     <span className="pill">Level {level}</span>
                     <span className="pill">Score: {score.current}/{score.total}</span>
+                    {streak > 0 && <span className="pill">🔥 {streak}</span>}
                 </div>
+
+                {/* Strategy 1: Streak Reward Badge (Positive Reinforcement) */}
+                <StreakReward streak={streak} />
 
                 <h2 className="instruction-text">Which group has more apples?</h2>
 
-                {/* Feedback Overlay */}
+                {/* Feedback Overlay — Strategy 3: Multi-sensory encouragement */}
                 {feedback === 'correct' && (
                     <div className="feedback-overlay">
                         <span className="feedback-icon">✓</span>
-                        <span className="feedback-text">Well done!</span>
+                        <span className="feedback-text">{encouragement}</span>
                     </div>
                 )}
                 {feedback === 'try-again' && (
                     <div className="feedback-overlay error">
                         <span className="feedback-icon">✗</span>
-                        <span className="feedback-text">Try again!</span>
+                        <span className="feedback-text">{encouragement}</span>
                     </div>
                 )}
+
+                {/* Strategy 2: Scaffolding Hint (Visual counting aid after wrong answer) */}
+                <ScaffoldingHint
+                    gameType="comparison"
+                    questionData={{ leftCount: itemsLeft.length, rightCount: itemsRight.length }}
+                    show={showHint}
+                />
 
                 <div className="comparison-container">
                     {/* Left Group */}

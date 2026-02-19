@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
+import { StreakReward, ScaffoldingHint, getEncouragement } from '../components/ResearchStrategies';
 import './GamePage.css';
 import './PatternRecognition.css';
 import correctSound from '../assets/correct.mp3';
@@ -9,9 +10,10 @@ import { generatePattern } from '../services/api';
 
 const PatternRecognition = () => {
     const navigate = useNavigate();
-    const { settings, recordAnswer, updateLevel, addTime } = useProgress();
+    // eslint-disable-next-line no-unused-vars
+    const { settings, recordAnswer, addTime } = useProgress();
 
-    const [level, setLevel] = useState(4);
+    const [level] = useState(4); // Level is fixed for this demo, setLevel removed
     const [score, setScore] = useState({ current: 25, total: 40 });
     const [pattern, setPattern] = useState([]);
     const [answer, setAnswer] = useState(null);
@@ -19,6 +21,9 @@ const PatternRecognition = () => {
     const [feedback, setFeedback] = useState(null);
     const [startTime, setStartTime] = useState(Date.now());
     const [timeElapsed, setTimeElapsed] = useState(0);
+    const [streak, setStreak] = useState(0);
+    const [showHint, setShowHint] = useState(false);
+    const [encouragement, setEncouragement] = useState('');
 
     const shapes = ['🔴', '🔵', '🟢', '🟡', '🟣', '🟠'];
 
@@ -62,6 +67,7 @@ const PatternRecognition = () => {
 
     useEffect(() => {
         generatePatternQuestion();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [level]);
 
     useEffect(() => {
@@ -85,8 +91,15 @@ const PatternRecognition = () => {
 
         if (isCorrect) {
             setScore(prev => ({ ...prev, current: prev.current + 1, total: prev.total + 1 }));
+            const newStreak = streak + 1;
+            setStreak(newStreak);
+            setShowHint(false);
+            setEncouragement(getEncouragement(true));
             setTimeout(generatePatternQuestion, 1500);
         } else {
+            setStreak(0);
+            setShowHint(true);
+            setEncouragement(getEncouragement(false));
             setTimeout(() => setFeedback(null), 1000);
         }
     };
@@ -111,7 +124,10 @@ const PatternRecognition = () => {
                 <div className="stats-pills">
                     <span className="pill">Level {level}</span>
                     <span className="pill">Score: {score.current}/{score.total}</span>
+                    {streak > 0 && <span className="pill">🔥 {streak}</span>}
                 </div>
+
+                <StreakReward streak={streak} />
 
                 <h2 className="instruction-text">What comes next in the pattern?</h2>
 
@@ -139,15 +155,17 @@ const PatternRecognition = () => {
                 {feedback === 'correct' && (
                     <div className="feedback-overlay">
                         <span className="feedback-icon">✓</span>
-                        <span className="feedback-text">Well done!</span>
+                        <span className="feedback-text">{encouragement}</span>
                     </div>
                 )}
                 {feedback === 'try-again' && (
                     <div className="feedback-overlay error">
                         <span className="feedback-icon">✗</span>
-                        <span className="feedback-text">Try again!</span>
+                        <span className="feedback-text">{encouragement}</span>
                     </div>
                 )}
+
+                <ScaffoldingHint gameType="pattern" questionData={{}} show={showHint} />
 
                 {/* Footer Info */}
                 <div className="game-footer-info">

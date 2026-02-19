@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
+import { StreakReward, ScaffoldingHint, getEncouragement } from '../components/ResearchStrategies';
 import './GamePage.css';
 import './NumberSequencing.css';
 import correctSound from '../assets/correct.mp3';
@@ -9,9 +10,10 @@ import { generateSequencing } from '../services/api';
 
 const NumberSequencing = () => {
     const navigate = useNavigate();
-    const { settings, recordAnswer, updateLevel, addTime } = useProgress();
+    // eslint-disable-next-line no-unused-vars
+    const { settings, recordAnswer, addTime } = useProgress();
 
-    const [level, setLevel] = useState(1);
+    const [level] = useState(1); // Level is fixed for this demo, setLevel removed
     const [score, setScore] = useState({ current: 2, total: 2 });
     const [targetSequence, setTargetSequence] = useState([]);
     const [availableNumbers, setAvailableNumbers] = useState([]);
@@ -19,6 +21,9 @@ const NumberSequencing = () => {
     const [feedback, setFeedback] = useState(null);
     const [startTime, setStartTime] = useState(Date.now());
     const [timeElapsed, setTimeElapsed] = useState(0);
+    const [streak, setStreak] = useState(0);
+    const [showHint, setShowHint] = useState(false);
+    const [encouragement, setEncouragement] = useState('');
 
     const playSound = (isCorrect) => {
         if (!settings?.soundEnabled) return;
@@ -56,6 +61,7 @@ const NumberSequencing = () => {
 
     useEffect(() => {
         generateLevel();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [level]);
 
     useEffect(() => {
@@ -112,8 +118,15 @@ const NumberSequencing = () => {
 
         if (isCorrect) {
             if (score.current < 10) setScore(prev => ({ ...prev, current: prev.current + 1 }));
+            const newStreak = streak + 1;
+            setStreak(newStreak);
+            setShowHint(false);
+            setEncouragement(getEncouragement(true));
             setTimeout(generateLevel, 1500);
         } else {
+            setStreak(0);
+            setShowHint(true);
+            setEncouragement(getEncouragement(false));
             setTimeout(() => setFeedback(null), 1000);
         }
     };
@@ -143,7 +156,10 @@ const NumberSequencing = () => {
                 <div className="stats-pills">
                     <span className="pill">Level {level}</span>
                     <span className="pill">Score: {score.current}/{score.total}</span>
+                    {streak > 0 && <span className="pill">🔥 {streak}</span>}
                 </div>
+
+                <StreakReward streak={streak} />
 
                 <h2 className="instruction-text">Drag numbers to arrange them from smallest to largest</h2>
 
@@ -193,6 +209,8 @@ const NumberSequencing = () => {
                     </div>
                 </div>
 
+                <ScaffoldingHint gameType="sequencing" questionData={{}} show={showHint} />
+
                 {/* Footer Info */}
                 <div className="game-footer-info">
                     Round 3 • Level {level}
@@ -210,13 +228,13 @@ const NumberSequencing = () => {
             {feedback === 'correct' && (
                 <div className="feedback-overlay">
                     <span className="feedback-icon">✓</span>
-                    <span className="feedback-text">Well done!</span>
+                    <span className="feedback-text">{encouragement}</span>
                 </div>
             )}
             {feedback === 'try-again' && (
                 <div className="feedback-overlay error">
                     <span className="feedback-icon">✗</span>
-                    <span className="feedback-text">Try again!</span>
+                    <span className="feedback-text">{encouragement}</span>
                 </div>
             )}
         </div>
