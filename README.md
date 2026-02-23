@@ -4,9 +4,9 @@
 MathVerse is an adaptive visual mathematics learning portal specifically designed for neurodiverse children, with a focus on autism spectrum learners. The platform provides a calm, structured, and sensory-friendly environment where children can learn fundamental math concepts through visual representation and interactive gameplay.
 
 👥 **Team Information**
-Roll No: [Your Roll Number]
-Name: [Your Name]
-Course: [Course Code] - [Course Name]
+Roll No: CB.SC.U4CSE23526
+Name: LEENA SRI K
+Course: 23CSE461 - FULL STACK FRAMEWORKS
 Institution: Amrita School of Computing, Amrita Vishwa Vidyapeetham, Coimbatore - 641112
 Course Teacher: Dr. T. Senthil Kumar (Professor)
 Email: t_senthilkumar@cb.amrita.edu
@@ -42,14 +42,18 @@ Email: t_senthilkumar@cb.amrita.edu
    - Multiple difficulty modes
    - Theme customization
 
-🛠️ **Technology Stack**
-- Frontend Framework: React.js 18
-- Routing: React Router DOM v6
-- State Management: Context API with React Hooks
-- Data Visualization: Recharts library
-- Data Persistence: LocalStorage
-- Styling: Custom CSS with responsive design
-- Development Tools: React Scripts, ESLint
+44: 
+45: � **Live Demo**
+46: - **Frontend (Vercel):** [https://math-verse-bhpc.vercel.app/](https://math-verse-bhpc.vercel.app/)
+47: - **Backend (Render):** [https://mathverse.onrender.com/api](https://mathverse.onrender.com/api)
+48: 
+49: �🛠️ **Technology Stack**
+50: - **Frontend:** React.js 18, React Router DOM v6, Recharts
+51: - **Backend:** Node.js, Express.js
+52: - **Database:** MongoDB Atlas (Cloud)
+53: - **Deployment:** Vercel (Frontend), Render (Backend)
+54: - **Persistence:** MongoDB (Cloud) & LocalStorage (Fallback)
+55: 
 
 📦 **Installation & Setup**
 Prerequisites

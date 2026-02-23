@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Welcome Routes
+app.get('/', (req, res) => res.send('MathVerse Backend is Running! 🚀'));
+app.get('/api', (req, res) => res.send('MathVerse API is online. Use endpoints like /api/progress or /api/analytics.'));
+
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mathverse';
 mongoose.connect(MONGODB_URI)
