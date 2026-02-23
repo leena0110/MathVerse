@@ -1,30 +1,28 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { fetchProgress, saveProgress } from '../services/api';
 
 const ProgressContext = createContext();
 
 export const useProgress = () => useContext(ProgressContext);
 
 export const ProgressProvider = ({ children }) => {
-    const [progress, setProgress] = useState(() => {
-        const saved = localStorage.getItem('mathVerseProgress');
-        return saved ? JSON.parse(saved) : {
-            quantityComparison: { level: 1, completed: 0, correct: 0 },
-            numberLineAddition: { level: 1, completed: 0, correct: 0 },
-            patternRecognition: { level: 1, completed: 0, correct: 0 },
-            numberSequencing: { level: 1, completed: 0, correct: 0 },
-            totalTime: 0,
-            lastActive: new Date().toISOString()
-        };
+    const [progress, setProgress] = useState({
+        quantityComparison: { level: 1, completed: 0, correct: 0 },
+        numberLineAddition: { level: 1, completed: 0, correct: 0 },
+        patternRecognition: { level: 1, completed: 0, correct: 0 },
+        numberSequencing: { level: 1, completed: 0, correct: 0 },
+        totalTime: 0,
+        lastActive: new Date().toISOString()
     });
 
     const [settings, setSettings] = useState(() => {
         const saved = localStorage.getItem('mathVerseSettings');
         return saved ? JSON.parse(saved) : {
             soundEnabled: true,
-            animationSpeed: 'normal', // slow, normal, fast
+            animationSpeed: 'normal',
             showTimer: false,
-            difficulty: 'adaptive', // easy, medium, hard, adaptive
-            theme: 'pastel' // pastel, dark-mode
+            difficulty: 'adaptive',
+            theme: 'pastel'
         };
     });
 
@@ -33,7 +31,29 @@ export const ProgressProvider = ({ children }) => {
         gamesPlayed: 0
     });
 
+    // 🌐 Backend Sync: Load
     useEffect(() => {
+        const initProgress = async () => {
+            try {
+                const data = await fetchProgress();
+                if (data) {
+                    setProgress(data);
+                } else {
+                    const saved = localStorage.getItem('mathVerseProgress');
+                    if (saved) setProgress(JSON.parse(saved));
+                }
+            } catch (err) {
+                console.warn('Backend unavailable, using LocalStorage');
+                const saved = localStorage.getItem('mathVerseProgress');
+                if (saved) setProgress(JSON.parse(saved));
+            }
+        };
+        initProgress();
+    }, []);
+
+    // 🌐 Backend Sync: Save
+    useEffect(() => {
+        saveProgress(progress).catch(err => console.error('Cloud save failed:', err));
         localStorage.setItem('mathVerseProgress', JSON.stringify(progress));
     }, [progress]);
 
